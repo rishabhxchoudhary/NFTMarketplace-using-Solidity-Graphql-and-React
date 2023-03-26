@@ -29,10 +29,13 @@ const SaleCard = ({reexecuteQuery,nft }) => {
 
     async function handleCancel() {
       setLoading(true);
-      const transaction = await contract.cancelListing(nft.id);
-      await transaction.wait();
-      reexecuteQuery();
-      alert("NFT Cancelled Successfully")
+      try{
+        const transaction = await contract.cancelListing(nft.id);
+        await transaction.wait();
+        reexecuteQuery();
+        alert("NFT Cancelled Successfully")
+      }
+      catch(err){ console.log(err);}
       setLoading(false);
     }
 
