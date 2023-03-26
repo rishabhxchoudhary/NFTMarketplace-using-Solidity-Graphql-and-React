@@ -5,6 +5,10 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { contractABI } from './utils/constants';
 import Sale from './Components/Sale/Sale';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Owned from './Components/Owned/Owned';
+import Create from './Components/Create/Create';
 
 export default function App() {
   const [account, setAccount] = useState(null);
