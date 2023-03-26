@@ -48,7 +48,7 @@ const HomeCard = ({reexecuteQuery,nft }) => {
         <div className="card-body">
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{description}</p>
-            <p className="card-text">Owner Address : {nft.to}</p>
+            <p className="card-text">Owner Address : {nft.from}</p>
             <p className="card-text">Price : {ethers.utils.formatEther(nft.price)} Eth.</p>
             <button className="btn-sell" disabled={loading} onClick={()=>{handleCancel()}} >{loading ? "Buying.." : "Buy NFT" }</button>
         </div>
