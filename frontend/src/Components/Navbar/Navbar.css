@@ -1,0 +1,72 @@
+.navbar {
+    background-color: #fff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+  }
+  
+  .navbar-logo {
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  
+  .navbar-links {
+    display: flex;
+  }
+  
+  .navbar-link {
+    color: #000;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    text-decoration: none;
+  }
+  
+  .navbar-button {
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-button-loading {
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: progress;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-account-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-account-info img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+  
+  .navbar-account-address {
+    font-size: 1.2
+  }  

@@ -1,0 +1,72 @@
+.create-nft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+.create-nft h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-nft form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-nft .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-nft label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-nft input,
+.create-nft textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+
+.create-nft input[type='file'] {
+  margin-bottom: 1rem;
+}
+
+.create-nft button[type='submit'] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.create-nft button[type='submit']:disabled {
+  background-color: #ccc;
+  cursor: default;
+}
+
+.create-nft button[type='submit']:hover:not(:disabled) {
+  background-color: #2e7d32;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
