@@ -40,13 +40,6 @@ export default function App() {
       window.ethereum.on('accountsChanged', accountsChanged);
       window.ethereum.on('chainChanged', chainChanged);
       alreadyConnected();
-      window.ethereum.on("chainChanged", async () => {
-        window.location.reload();
-      });
-      window.ethereum.on("accountsChanged", async () => {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0]);
-      });
     }
     else{
       alert("Please install Metamask to use this app");
@@ -59,6 +52,17 @@ export default function App() {
       }).catch((error) => {
       });
     }
+  },[])
+
+  useEffect(() => {
+    window.ethereum.on("chainChanged", async () => {
+      window.location.reload();
+    });
+    window.ethereum.on("accountsChanged", async () => {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      setAccount(accounts[0]);
+    });
+
   })
 
   useState(()=>{

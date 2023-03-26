@@ -34,8 +34,9 @@ const HomeCard = ({reexecuteQuery,nft }) => {
           const transaction = await contract.buyNFT(nft.id, {value: (nft.price)});
           await transaction.wait();
           alert("NFT Bought Successfully")
+          window.location.reload();
         }
-        catch (error) {console.error(error);}
+        catch (error) {alert(error.stack);console.error(error);}
       reexecuteQuery();
       setLoading(false);
     }

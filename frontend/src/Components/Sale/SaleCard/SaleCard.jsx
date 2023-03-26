@@ -34,8 +34,9 @@ const SaleCard = ({reexecuteQuery,nft }) => {
         await transaction.wait();
         reexecuteQuery();
         alert("NFT Cancelled Successfully")
+        window.location.reload();
       }
-      catch(err){ console.log(err);}
+      catch(err){ alert(err.stack); console.log(err);}
       setLoading(false);
     }
 

@@ -46,8 +46,10 @@ const Owned = () => {
       const transaction = await contract.listNFT(Number(selectedNFT), wei);
       await transaction.wait();
       alert('Your NFT has been put for sale!');
+      window.location.reload();
     }
     catch(error){
+      alert(error.stack);
       console.log(error);
     }
     setLoading(false)
