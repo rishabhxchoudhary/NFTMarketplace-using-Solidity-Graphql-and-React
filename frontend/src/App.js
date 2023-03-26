@@ -1,56 +1,34 @@
-import './App.css';
-import { Routes, Route } from "react-router-dom";
-import Create from './Components/Create/Create';
-import Owned from './Components/Owned/Owned';
-import React, { useEffect, useState } from 'react';
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import { UserContext } from './Context/userContext';
+import { ethers } from "ethers";
+import Web3Modal from "web3modal";
+import { contractABI } from './utils/constants';
 import Sale from './Components/Sale/Sale';
 
 export default function App() {
-
-  const accountsChanged = (newAccount) => {
-    if (newAccount.length) setAccount(newAccount[0]);
-    else setAccount(null);
-  };
-
-  const chainChanged = () => {
-    console.log('chain changed');
-    setAccount(null);
-  };
-  const alreadyConnected = async () => {
-    try {
-      const res = await window.ethereum.request({
-        method: 'eth_accounts',
-      });
-      accountsChanged(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', accountsChanged);
-      window.ethereum.on('chainChanged', chainChanged);
-      alreadyConnected();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (window.ethereum.networkVersion !== '80001') {
-      window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x13881' }],
-      }).then(() => {
-      }).catch((error) => {
-      });
-    }
-  })
   const [account, setAccount] = useState(null);
   const [contract, setContract] = useState(null);
 
-  useEffect(() => {
+  const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI, signerOrProvider);
+  const connectingWithContract = async () => {
+        try {
+        const web3modal = new Web3Modal();
+        const connctions = await web3modal.connect();
+        const provider = new ethers.providers.Web3Provider(connctions);
+        const signer = provider.getSigner();
+        setContract(fetchContract(signer));
+              }
+    catch (err) {
+        console.log(err);
+          }
+  }
+    useEffect(()=>{
+   connectingWithContract();
+   console.log(process.env)
+  },[])
+  
+   useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on("chainChanged", async () => {
         window.location.reload();
@@ -64,9 +42,9 @@ export default function App() {
       alert("Please install Metamask to use this app");
     }
   });
-
+  
   return (
-    <UserContext.Provider value={{account,setContract, setAccount, contract}}>
+    <UserContext.Provider value={{account, setAccount, contract}}>
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -78,4 +56,3 @@ export default function App() {
     </UserContext.Provider>
   );
 }
-
