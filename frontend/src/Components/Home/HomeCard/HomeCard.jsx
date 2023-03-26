@@ -35,7 +35,7 @@ const HomeCard = ({reexecuteQuery,nft }) => {
         }
         catch (error) {console.error(error);}
       reexecuteQuery();
-      alert("NFT Cancelled Successfully")
+      alert("NFT Bought Successfully")
       setLoading(false);
     }
 
