@@ -1,18 +1,42 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../Context/userContext';
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
 
 import "./Navbar.css"
+import { contractABI } from '../../utils/constants';
 
 const Navbar = () => {
-  const {account,setAccount} = useContext(UserContext);
+  const {account,setAccount,setContract } = useContext(UserContext);
   const [isConnecting, setIsConnecting] = useState(false);
 
+  const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI, signerOrProvider);
+  const connectingWithContract = async () => {
+    try {
+        const web3modal = new Web3Modal();
+        const connctions = await web3modal.connect();
+        const provider = new ethers.providers.Web3Provider(connctions);
+        const signer = provider.getSigner();
+        setContract(fetchContract(signer));
+    }
+    catch (err) {
+        console.log(err);
+    }
+  }
   const connectMetamask = async () => {
     setIsConnecting(true);
     try {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
       setAccount(accounts[0]);
+      connectingWithContract()
+      window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x13881' }],
+      }).then(() => {
+      }).catch((error) => {
+        console.log(error);
+      });
     } catch (error) {
       console.log(error);
     }
