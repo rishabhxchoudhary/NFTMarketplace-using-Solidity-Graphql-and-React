@@ -11,6 +11,7 @@ import { ethers } from 'ethers';
 import { contractABI } from './utils/constants';
 import Web3Modal from 'web3modal';
 import Default from './Components/Home/Default/Default';
+import { ButtonContext } from './Context/ButtonContext';
 
 export default function App() {
   const [account, setAccount] = useState(null);
@@ -52,43 +53,49 @@ export default function App() {
     }
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     setInterval(() => {
       // console.log("Contract",contract)
       // console.log("FFFF")
     }, 1000);
   })
 
-  useState(()=>{
-      const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI, signerOrProvider);
-      const connectingWithContract = async () => {
-        try {
-            const web3modal = new Web3Modal();
-            const connctions = await web3modal.connect();
-            const provider = new ethers.providers.Web3Provider(connctions);
-            const signer = provider.getSigner();
-            setContract(fetchContract(signer));
-        }
-        catch (err) {
-            console.log(err);
-        }
+  useState(() => {
+    const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI, signerOrProvider);
+    const connectingWithContract = async () => {
+      try {
+        const web3modal = new Web3Modal();
+        const connctions = await web3modal.connect();
+        const provider = new ethers.providers.Web3Provider(connctions);
+        const signer = provider.getSigner();
+        setContract(fetchContract(signer));
       }
-      connectingWithContract();
+      catch (err) {
+        console.log(err);
+      }
     }
+    connectingWithContract();
+  }
   )
 
+  const [isConnecting, setIsConnecting] = useState(false);
+  
+
   return (
-    <UserContext.Provider value={{account,setContract, setAccount, contract}}>
-      <Navbar/>
-      {!account ? <Default/> : 
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/sale" element={<Sale/>} />
-        <Route path="/owned" element={<Owned/>} />
-        <Route path="/create" element={<Create/>} />
-        <Route path="*" element={<h1>Route Not Found</h1>} />
-      </Routes>
-      }
+    <UserContext.Provider value={{ account, setContract, setAccount, contract }}>
+      <ButtonContext.Provider value={{isConnecting,setIsConnecting}} >
+        <Navbar />
+        {!account ? <Default /> :
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sale" element={<Sale />} />
+            <Route path="/owned" element={<Owned />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="*" element={<h1>Route Not Found</h1>} />
+          </Routes>
+        }
+      </ButtonContext.Provider>
     </UserContext.Provider>
   );
 }

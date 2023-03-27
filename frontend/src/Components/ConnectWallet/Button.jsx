@@ -3,10 +3,11 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../../Context/userContext';
 import { contractABI } from '../../utils/constants';
 import Web3Modal from "web3modal";
+import { ButtonContext } from '../../Context/ButtonContext';
 
 const Button = () => {
     const {account,setAccount,setContract, contract } = useContext(UserContext);
-    const [isConnecting, setIsConnecting] = useState(false);
+    const { setIsConnecting, isConnecting } = useContext(ButtonContext);
   
     const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI, signerOrProvider);
     const connectingWithContract = async () => {
@@ -26,11 +27,11 @@ const Button = () => {
     const connectMetamask = async () => {
         if (window.ethereum){
             setIsConnecting(true);
+            console.log("Start")
             try {
               const accounts = await window.ethereum.request({ method: 'eth_accounts' });
               setAccount(accounts[0]);
-              connectingWithContract();
-              console.log("Contract : ",contract)
+              await connectingWithContract();
               window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: '0x13881' }],
@@ -41,6 +42,7 @@ const Button = () => {
             } catch (error) {
               console.log(error);
             }
+            console.log("Start")
             setIsConnecting(false);
         }
         else{
