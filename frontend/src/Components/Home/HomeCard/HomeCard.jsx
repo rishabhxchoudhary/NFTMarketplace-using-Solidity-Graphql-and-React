@@ -30,7 +30,6 @@ const HomeCard = ({reexecuteQuery,nft }) => {
     async function handleCancel() {
       setLoading(true);
       try{
-          console.log(contract);
           const transaction = await contract.buyNFT(nft.id, {value: (nft.price)});
           await transaction.wait();
           alert("NFT Bought Successfully")
