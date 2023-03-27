@@ -45,8 +45,8 @@ const HomeCard = ({reexecuteQuery,nft }) => {
     <div className="card">
         <img src={image} alt={name} className="card-img-top skeleton" />
         <div className="card-body">
-            <div className="skeleton skeleton-text-h1">,ajnbvks</div>
-            <div className="skeleton skeleton-text"></div>
+            {/* <div className="skeleton skeleton-text-h1">,ajnbvks</div>
+            <div className="skeleton skeleton-text"></div> */}
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{description}</p>
             <p className="card-text">Owner Address : {nft.from}</p>
