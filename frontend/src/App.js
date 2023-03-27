@@ -10,8 +10,8 @@ import Sale from './Components/Sale/Sale';
 import { ethers } from 'ethers';
 import { contractABI } from './utils/constants';
 import Web3Modal from 'web3modal';
-import Default from './Components/Home/Default/Default';
 import { ButtonContext } from './Context/ButtonContext';
+import Default from './Components/Default/Default';
 
 export default function App() {
   const [account, setAccount] = useState(null);

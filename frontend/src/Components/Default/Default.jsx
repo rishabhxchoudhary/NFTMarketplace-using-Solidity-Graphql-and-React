@@ -1,7 +1,7 @@
 import React from "react";
 import "./Default.css"; // Import the CSS file for this component
-import vector from '../../../Assets/vector.jpg';
-import Button from "../../ConnectWallet/Button";
+import vector from '../../Assets/vector.jpg';
+import Button from "../ConnectWallet/Button";
 
 const Default = () => {
   return (

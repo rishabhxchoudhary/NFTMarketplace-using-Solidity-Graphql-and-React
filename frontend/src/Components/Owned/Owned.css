@@ -41,11 +41,12 @@
   
   .btn-sell {
     display: block;
+    height: 40px;
     width: 100%;
     margin-top: auto;
     margin-bottom: 0;
-    border-radius: 0;
-    background-color: #007bff;
+    border-radius: 4px;
+    background-color: #353935;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -53,7 +54,7 @@
   }
   
   .btn-sell:hover {
-    background-color: #0062cc;
+    background-color: #000;
   }
   
   .modal {

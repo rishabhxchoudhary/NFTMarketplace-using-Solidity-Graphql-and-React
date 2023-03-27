@@ -43,13 +43,15 @@ const HomeCard = ({reexecuteQuery,nft }) => {
   
   return (
     <div className="card">
-        <img src={image} alt={name} className="card-img-top" />
+        <img src={image} alt={name} className="card-img-top skeleton" />
         <div className="card-body">
+            <div className="skeleton skeleton-text-h1">,ajnbvks</div>
+            <div className="skeleton skeleton-text"></div>
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{description}</p>
             <p className="card-text">Owner Address : {nft.from}</p>
             <p className="card-text">Price : {ethers.utils.formatEther(nft.price)} Eth.</p>
-            <button className="btn-sell" disabled={loading} onClick={()=>{handleCancel()}} >{loading ? "Buying.." : "Buy NFT" }</button>
+            <button className="btn-sell" disabled={loading} onClick={()=>{handleCancel()}} >{loading ? "Loading..." : "Buy NFT" }</button>
         </div>
     </div>
   )
